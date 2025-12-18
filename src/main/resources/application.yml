@@ -1,0 +1,35 @@
+spring:
+  main:
+    allow-bean-definition-overriding: false
+
+  application:
+    name: demo
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${POSTGRES_HOSTNAME}:5432/postgres?currentSchema=demo
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: demo
+    generate-ddl: false
+
+  data:
+    rest:
+      detection-strategy: annotated
+
+  flyway:
+    enabled: true
+    schemas: demo
+    default-schema: demo
+    baseline-on-migrate: true
+
+server:
+  port: 8080
+

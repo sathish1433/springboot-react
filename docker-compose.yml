@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  backend:
+    image: sakthi1433/backend_java:v1.0
+    container_name: backend
+    ports:
+      - "8080:8080"
+    environment:
+      - POSTGRES_HOSTNAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - app-network
+
+  frontend:
+    image: sakthi1433/react_app:v1.0
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    networks:
+      - app-network
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+networks:
+  app-network:
+    driver: bridge
